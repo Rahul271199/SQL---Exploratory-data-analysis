@@ -1,23 +1,32 @@
-/*-------------------------------------------------
--------------------------------------------------
-           Dimension Exploration
+/*
+===============================================================================
+Database Exploration
+===============================================================================
+Purpose:
+    - To explore the structure of the database, including the list of tables and their schemas.
+    - To inspect the columns and metadata for specific tables.
 
-           Purpose:
-    - To explore the structure of dimension tables.
-	
-SQL Functions Used:
-    - DISTINCT
-    - ORDER BY
---------------------------------------------------
--------------------------------------------------
+Table Used:
+    - INFORMATION_SCHEMA.TABLES
+    - INFORMATION_SCHEMA.COLUMNS
+===============================================================================
 */
 
---Explore All countries our Customer come from
-SELECT DISTINCT country FROM gold.dim_customers
+-- Retrieve a list of all tables in the database
+SELECT 
+    TABLE_CATALOG, 
+    TABLE_SCHEMA, 
+    TABLE_NAME, 
+    TABLE_TYPE
+FROM INFORMATION_SCHEMA.TABLES;
 
---Explore All categories "The Major Divisions"
-SELECT DISTINCT category, subcategory, product_name FROM gold.dim_products
-ORDER BY 1,2,3
-
+-- Retrieve all columns for a specific table (dim_customers)
+SELECT 
+    COLUMN_NAME, 
+    DATA_TYPE, 
+    IS_NULLABLE, 
+    CHARACTER_MAXIMUM_LENGTH
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_NAME = 'dim_customers';
 
 
